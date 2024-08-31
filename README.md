@@ -60,7 +60,7 @@ Below are some screenshots of the Kanban board application:
 
 
 *List of all projects, providing an overview and quick access to individual projects.*
-![Projects Index](assets/project-index.png)
+![Projects Index](assets/projects-index.png)
 
 
 *Form for creating a new project with relevant details.*
