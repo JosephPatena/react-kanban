@@ -60,7 +60,7 @@ Below are some screenshots of the Kanban board application:
 
 
 *List of all projects, providing an overview and quick access to individual projects.*
-![Projects Index](assets/projects-index.png)
+![Projects Index](assets/project-index.png)
 
 
 *Form for creating a new project with relevant details.*
@@ -112,7 +112,7 @@ To get started with the project, follow these steps:
     ```bash
     npm install
 
-5. Make sure backend repo is running and is using port 8000:
+5. Make sure backend repo is running and is using port 8000.
 
 6. Start the development server:
     ```bash
