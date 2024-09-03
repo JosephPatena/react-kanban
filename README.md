@@ -98,26 +98,31 @@ Below are some screenshots of the Kanban board application:
 
 To get started with the project, follow these steps:
 
-1. Clone backend repository, refer to this repo: [Laravel React SPA Kanban](https://github.com/JosephPatena/laravel-react-spa-kanban.git) for installation instructions.
 
-2. Clone this repository:
+1. Clone the backend repository from one of the following options:
+- [Express JS - MongoDB](https://github.com/JosephPatena/expressjs-mongodb.git)
+- [Laravel React SPA Kanban](https://github.com/JosephPatena/laravel-react-spa-kanban.git)
+
+2. Refer to the installation instructions in the respective repository.
+
+3. Clone this repository:
    ```bash
    git clone https://github.com/JosephPatena/react-kanban.git
 
-3. Navigate to the project directory:
+4. Navigate to the project directory:
     ```bash
     cd react-kanban
 
-4. Install the dependencies:
+5. Install the dependencies:
     ```bash
     npm install
 
-5. Make sure backend repo is running and is using port 8000.
+6. Make sure backend repo is running and is using port 8000.
 
-6. Start the development server:
+7. Start the development server:
     ```bash
     npm run dev
 
-7. Access the application in your browser:
+8. Access the application in your browser:
     ```bash
     http://localhost:5173
