@@ -8,7 +8,7 @@ function TaskView({ task, users, getTasks }) {
     const handleSave = (event) => {
         const column = event.target.name;
         const value = event.target.value;
-        axios.post(`${import.meta.env.VITE_BASE_URL}/task-update/${task.id}`, {
+        axios.post(`${import.meta.env.VITE_BASE_URL}/task/update/${task.id}`, {
             column: column,
             value: value,
         })

@@ -16,7 +16,7 @@ function TasksContainer({ tasks, status, priority, handleOpenModal, handleOpenTa
 
     const updateStatus = async (item) => {
         if (item.status !== status || item.priority !== priority) {
-            axios.post(`${import.meta.env.VITE_BASE_URL}/update-status`, { id: item.id, status: status, priority: priority })
+            axios.post(`${import.meta.env.VITE_BASE_URL}/task/update/${item.id}`, { status: status, priority: priority })
             .then(res => {
                 getTasks()
             })

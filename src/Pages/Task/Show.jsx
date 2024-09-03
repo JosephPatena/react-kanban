@@ -10,7 +10,7 @@ export default function Show() {
   const { id } = useParams();
 
   const getTask = async () => {
-    await axios.get(`${import.meta.env.VITE_BASE_URL}/task-fetch/${id}`)
+    await axios.get(`${import.meta.env.VITE_BASE_URL}/task/fetch/${id}`)
     .then(res => {
         setTask(res.data.task)
     })
@@ -19,7 +19,7 @@ export default function Show() {
   }
 
   const getUsers = () => {
-    axios.post(`${import.meta.env.VITE_BASE_URL}/users-fetch`)
+    axios.post(`${import.meta.env.VITE_BASE_URL}/user/fetch-all`)
     .then(res => {
         setUsers(res.data.data)
     })

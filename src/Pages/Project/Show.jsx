@@ -9,7 +9,7 @@ export default function Show() {
   const { id } = useParams();
   const [tasks, setTasks] = useState([]);
   const [links, setLinks] = useState([]);
-  const [activeLink, setActiveLink] = useState(`${import.meta.env.VITE_BASE_URL}/tasks-fetch`);
+  const [activeLink, setActiveLink] = useState(`${import.meta.env.VITE_BASE_URL}/task/fetch-all`);
   const [project, setProject] = useState({
     id: id,
     name: '',
@@ -23,7 +23,7 @@ export default function Show() {
   });
 
   const getProject = async () => {
-    await axios.get(`${import.meta.env.VITE_BASE_URL}/project-fetch/${id}`)
+    await axios.get(`${import.meta.env.VITE_BASE_URL}/project/fetch/${id}`)
     .then(res => {
       setProject(res.data.project)
     })
@@ -38,6 +38,7 @@ export default function Show() {
       assignees: [],
       reviewers: [],
       priorities: [],
+      project_ids: [id],
       from_task_page: true,
       sort_direction: 'desc',
       sort_field : 'created_at',
@@ -114,7 +115,7 @@ export default function Show() {
                   </div>
                   <div className="mt-4">
                     <label className="font-bold text-lg">Created By</label>
-                    <p className="mt-1">{project.createdBy.name}</p>
+                    <p className="mt-1">{project.createdBy ? project.createdBy.name : ""}</p>
                   </div>
                 </div>
                 <div>
@@ -128,7 +129,7 @@ export default function Show() {
                   </div>
                   <div className="mt-4">
                     <label className="font-bold text-lg">Updated By</label>
-                    <p className="mt-1">{project.updatedBy.name}</p>
+                    <p className="mt-1">{project.updatedBy ? project.updatedBy.name : ""}</p>
                   </div>
                 </div>
               </div>

@@ -2,27 +2,36 @@ import TextAreaInput from "../../Components/TextAreaInput";
 import SelectInput from "../../Components/SelectInput";
 import InputLabel from "../../Components/InputLabel";
 import GuestLayout from "../../Layouts/GuestLayout";
+import { Link, useNavigate } from "react-router-dom";
 import TextInput from "../../Components/TextInput";
-import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
 export default function Create() {
+  const navigate = useNavigate()
+
   const [project, setProject] = useState({
     name: '',
     description: '',
-    image: '',
+    image_path: '',
     status: '',
     due_date: '',
+    redirect_not: true
   });
 
   const saveProject = async () => {
-    await axios.post(`${import.meta.env.VITE_BASE_URL}/project-save`, project)
+    await axios.post(`${import.meta.env.VITE_BASE_URL}/project/save`, project)
     .then(res => {
-      navigate(`/project-view/${id}`)
+      navigate(`/project-view/${res.data.id}`)
     })
     .catch(error => {
     });
+  }
+
+  const handleQuery = (query) => {
+    setProject((prev) => {
+        return { ...prev, ...query }
+    })
   }
 
   return (
@@ -53,7 +62,7 @@ export default function Create() {
                   name="image"
                   className="mt-1 block w-full"
                   onChange={(e) => 
-                    setProject({image: e.target.files[0]})
+                    handleQuery({image_path: e.target.files[0]})
                   }
                 />
               </div>
@@ -67,7 +76,7 @@ export default function Create() {
                   className="mt-1 block w-full"
                   isFocused={true}
                   onChange={(e) => 
-                    setProject({name: e.target.value})
+                    handleQuery({name: e.target.value})
                   }
                 />
               </div>
@@ -82,7 +91,7 @@ export default function Create() {
                   name="description"
                   className="mt-1 block w-full"
                   onChange={(e) => 
-                    setProject({description: e.target.value})
+                    handleQuery({description: e.target.value})
                   }
                 />
               </div>
@@ -98,7 +107,7 @@ export default function Create() {
                   name="due_date"
                   className="mt-1 block w-full"
                   onChange={(e) => 
-                    setProject({due_date: e.target.value})
+                    handleQuery({due_date: e.target.value})
                   }
                 />
               </div>
@@ -110,7 +119,7 @@ export default function Create() {
                   id="project_status"
                   className="mt-1 block w-full"
                   onChange={(e) => 
-                    setProject({status: e.target.value})
+                    handleQuery({status: e.target.value})
                   }
                 >
                   <option value="">Select Status</option>

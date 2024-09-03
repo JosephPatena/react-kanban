@@ -4,16 +4,29 @@ import { Toaster } from 'react-hot-toast';
 import CreateProject from './Pages/Project/Create';
 import ShowProject from './Pages/Project/Show';
 import EditProject from './Pages/Project/Edit';
-import Register from './Pages/Auth/Register';
-import CreateTask from './Pages/Task/Create';
 import Projects from './Pages/Project/Index';
-import Kanban from './Pages/Kanban/Index';
-import Dashboard from './Pages/Dashboard';
+
+import CreateTask from './Pages/Task/Create';
 import ShowTask from './Pages/Task/Show';
-import Login from './Pages/Auth/Login';
 import Tasks from './Pages/Task/Index';
 
+import CreateUser from './Pages/User/Create';
+import ShowUser from './Pages/User/Show';
+import EditUser from './Pages/User/Edit';
+import Users from './Pages/User/Index';
+
+import Dashboard from './Pages/Dashboard';
+import Kanban from './Pages/Kanban/Index';
+
+import Register from './Pages/Auth/Register';
+import Login from './Pages/Auth/Login';
+
 const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Dashboard />,
+  },
+
   {
     path: '/dashboard',
     element: <Dashboard />,
@@ -57,6 +70,26 @@ const router = createBrowserRouter([
   {
     path: '/project-edit/:id',
     element: <EditProject />
+  },
+
+  {
+    path: '/users',
+    element: <Users />
+  },
+
+  {
+    path: '/user-create',
+    element: <CreateUser />
+  },
+
+  {
+    path: '/user-view/:id',
+    element: <ShowUser />
+  },
+
+  {
+    path: '/user-edit/:id',
+    element: <EditUser />
   },
 
   {

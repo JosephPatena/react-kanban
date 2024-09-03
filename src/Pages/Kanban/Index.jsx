@@ -38,7 +38,7 @@ function Home() {
     });
 
     const getTasks = () => {
-        axios.post(`${import.meta.env.VITE_BASE_URL}/tasks-fetch`, queries)
+        axios.post(`${import.meta.env.VITE_BASE_URL}/task/fetch-all`, queries)
         .then(res => {
             setTasks(res.data.data)
         })
@@ -47,7 +47,7 @@ function Home() {
     }
 
     const getProjects = () => {
-        axios.post(`${import.meta.env.VITE_BASE_URL}/projects-fetch`)
+        axios.post(`${import.meta.env.VITE_BASE_URL}/project/fetch-all`)
         .then(res => {
             setProjects(res.data.data)
         })
@@ -56,7 +56,7 @@ function Home() {
     }
 
     const getUsers = () => {
-        axios.post(`${import.meta.env.VITE_BASE_URL}/users-fetch`)
+        axios.post(`${import.meta.env.VITE_BASE_URL}/user/fetch-all`)
         .then(res => {
             setUsers(res.data.data)
         })
@@ -100,12 +100,12 @@ function Home() {
             <GuestLayout
                 header={
                     <AdvancedSearch
-                    getTasks={getTasks}
-                    projects={projects}
-                    setQuery={setQuery}
-                    queries={queries}
-                    users={users}
-                />
+                        getTasks={getTasks}
+                        projects={projects}
+                        setQuery={setQuery}
+                        queries={queries}
+                        users={users}
+                    />
                 }
             >
                 <div className="py-12 pt-5">

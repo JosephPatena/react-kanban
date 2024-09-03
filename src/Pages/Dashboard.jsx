@@ -14,7 +14,7 @@ export default function Dashboard() {
   });
 
   const fetchFigures = () => {
-    axios.get(`${import.meta.env.VITE_BASE_URL}/fetch-figures`)
+    axios.get(`${import.meta.env.VITE_BASE_URL}/task/fetch-figures`)
     .then(res => {
       setFigures(res.data)
     })

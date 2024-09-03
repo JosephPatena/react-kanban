@@ -11,7 +11,7 @@ import axios from 'axios';
 export default function Index() {
   document.title = "Projects - React";
 
-  const [activeLink, setActiveLink] = useState(`${import.meta.env.VITE_BASE_URL}/projects-fetch`);
+  const [activeLink, setActiveLink] = useState(`${import.meta.env.VITE_BASE_URL}/project/fetch-all`);
   const [success, setSuccesss] = useState(false);
   const [projects, setProjects] = useState([]);
   const [links, setLinks] = useState([]);
@@ -223,7 +223,7 @@ export default function Index() {
                         <td className="px-3 py-2 text-nowrap">
                           {project.due_date}
                         </td>
-                        <td className="px-3 py-2">{project.createdBy.name}</td>
+                        <td className="px-3 py-2">{project.createdBy ? project.createdBy.name : ""}</td>
                       </tr>
                     ))}
                   </tbody>

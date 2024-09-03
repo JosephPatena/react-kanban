@@ -9,7 +9,7 @@ export default function Create() {
   const [users, setUsers] = useState([]);
   
   const getProjects = () => {
-      axios.post(`${import.meta.env.VITE_BASE_URL}/projects-fetch`)
+      axios.post(`${import.meta.env.VITE_BASE_URL}/project/fetch-all`)
       .then(res => {
           setProjects(res.data.data)
       })
@@ -18,7 +18,7 @@ export default function Create() {
   }
 
   const getUsers = () => {
-      axios.post(`${import.meta.env.VITE_BASE_URL}/users-fetch`)
+      axios.post(`${import.meta.env.VITE_BASE_URL}/user/fetch-all`)
       .then(res => {
           setUsers(res.data.data)
       })

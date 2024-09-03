@@ -16,7 +16,7 @@ function AuthContextProvider({ children }) {
 
     const login = async (data) => {
         try {
-            const res = await axios.post(`${import.meta.env.VITE_BASE_URL}/auth/login`, data, {
+            const res = await axios.post(`${import.meta.env.VITE_BASE_URL}/user/login`, data, {
                 withCredentials: true,
             })
 
@@ -57,7 +57,7 @@ function AuthContextProvider({ children }) {
     }
 
     const logout = async (token) => {
-        const res = await axios.post(`${import.meta.env.VITE_BASE_URL}/auth/logout`, null, {
+        const res = await axios.post(`${import.meta.env.VITE_BASE_URL}/user/logout`, null, {
             withCredentials: true,
             headers: {
                 'Authorization': `Bearer ${token}`,

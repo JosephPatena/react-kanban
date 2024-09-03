@@ -28,7 +28,7 @@ function Register() {
         e.preventDefault()
 
         try {
-            const res = await axios.post(`${import.meta.env.VITE_BASE_URL}/auth/register`, data)
+            const res = await axios.post(`${import.meta.env.VITE_BASE_URL}/user/register`, data)
 
             toast.success("Your account has been registered")
             toast("Please log in using your new account", {

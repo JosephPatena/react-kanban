@@ -30,7 +30,7 @@ function AddTaskModal({ projects, getTasks, handleOpenModal, users, status='pend
     };
 
     const handleAddTask = async () => {
-        axios.post(`${import.meta.env.VITE_BASE_URL}/task-store`, task)
+        axios.post(`${import.meta.env.VITE_BASE_URL}/task/save`, task)
         .then(res => {
             if (!getTasks) {
                 return navigate(`/task-view/${res.data.task.id}`)

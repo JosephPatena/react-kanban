@@ -8,7 +8,7 @@ import axios from 'axios';
 export default function Index() {
   document.title = "Tasks - React";
 
-  const [activeLink, setActiveLink] = useState(`${import.meta.env.VITE_BASE_URL}/tasks-fetch`);
+  const [activeLink, setActiveLink] = useState(`${import.meta.env.VITE_BASE_URL}/task/fetch-all`);
   const [projects, setProjects] = useState([]);
   const [tasks, setTasks] = useState([]);
   const [links, setLinks] = useState([]);
@@ -37,7 +37,7 @@ export default function Index() {
   }
 
   const getProjects = () => {
-      axios.post(`${import.meta.env.VITE_BASE_URL}/projects-fetch`)
+      axios.post(`${import.meta.env.VITE_BASE_URL}/project/fetch-all`)
       .then(res => {
           setProjects(res.data.data)
       })
@@ -46,7 +46,7 @@ export default function Index() {
   }
 
   const getUsers = () => {
-      axios.post(`${import.meta.env.VITE_BASE_URL}/users-fetch`)
+      axios.post(`${import.meta.env.VITE_BASE_URL}/user/fetch-all`)
       .then(res => {
           setUsers(res.data.data)
       })

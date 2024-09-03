@@ -20,22 +20,26 @@ export default function Create() {
     due_date: '',
     createdBy: '',
     updatedBy: { name: '' },
-    created_at: '',
+    created_at: ''
   });
 
   const getProject = async () => {
-    await axios.get(`${import.meta.env.VITE_BASE_URL}/project-fetch/${id}`)
+    await axios.get(`${import.meta.env.VITE_BASE_URL}/project/fetch/${id}`)
     .then(res => {
       setProject(res.data.project)
+      handleChange({redirect_not:true})
     })
     .catch(error => {
     });
   }
 
-  const saveProject = async () => {
-    await axios.post(`${import.meta.env.VITE_BASE_URL}/project-update/${id}`, project)
+  const updateProject = async () => {
+    await axios.post(`${import.meta.env.VITE_BASE_URL}/project/update/${id}`, project)
     .then(res => {
-      navigate(`/project-view/${id}`)
+      if (!res.data.id) {
+        return;
+      }
+      navigate(`/project-view/${res.data.id}`)
     })
     .catch(error => {
     });
@@ -84,7 +88,7 @@ export default function Create() {
                   name="image"
                   className="mt-1 block w-full"
                   onChange={(e) => 
-                    handleChange({image: e.target.files[0]})
+                    handleChange({image_path: e.target.files[0]})
                   }
                 />
               </div>
@@ -161,7 +165,7 @@ export default function Create() {
                 >
                   Cancel
                 </Link>
-                <button onClick={saveProject} className="bg-emerald-500 py-1 px-3 text-white rounded shadow transition-all hover:bg-emerald-600">
+                <button onClick={updateProject} className="bg-emerald-500 py-1 px-3 text-white rounded shadow transition-all hover:bg-emerald-600">
                   Submit
                 </button>
               </div>
