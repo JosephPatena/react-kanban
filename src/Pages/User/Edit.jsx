@@ -15,7 +15,6 @@ export default function Create() {
     name: '',
     email: '',
     password: '',
-    confirmed: '',
   });
 
   const getUser = async () => {
@@ -28,6 +27,8 @@ export default function Create() {
     });
   }
 
+  const [errors, setErrors] = useState([]);
+
   const updateUser = async () => {
     await axios.post(`${import.meta.env.VITE_BASE_URL}/user/update/${id}`, user)
     .then(res => {
@@ -37,8 +38,9 @@ export default function Create() {
       
       navigate(`/user-view/${res.data.id}`)
     })
-    .catch(error => {
-    });
+    .catch(err => {
+      setErrors(err.response.data.errors)
+    })
   }
 
   const handleChange = (query) => {
@@ -71,13 +73,21 @@ export default function Create() {
               <TextInput
                 id="username"
                 type="text"
-                name="name"
                 className="mt-1 block w-full"
                 defaultValue={user.name}
                 onChange={(e) => 
                   handleChange({name: e.target.value})
                 }
               />
+              {
+                    errors.name &&
+                    errors.name.map((notification) => (
+                      <>
+                        <small className='text-red-500'>{notification}</small>
+                        <br></br>
+                      </>
+                    ))
+                }
             </div>
             <div className="mt-4">
               <InputLabel
@@ -88,13 +98,21 @@ export default function Create() {
               <TextInput
                 id="user_email"
                 type="text"
-                name="email"
                 className="mt-1 block w-full"
                 defaultValue={user.email}
                 onChange={(e) => 
                   handleChange({email: e.target.value})
                 }
               />
+              {
+                    errors.email &&
+                    errors.email.map((notification) => (
+                      <>
+                        <small className='text-red-500'>{notification}</small>
+                        <br></br>
+                      </>
+                    ))
+                }
             </div>
             <div className="mt-4">
               <InputLabel
@@ -105,28 +123,44 @@ export default function Create() {
               <TextInput
                 id="user_password"
                 type="password"
-                name="password"
                 className="mt-1 block w-full"
                 onChange={(e) => 
                   handleChange({password: e.target.value})
                 }
               />
+              {
+                    errors.password &&
+                    errors.password.map((notification) => (
+                      <>
+                        <small className='text-red-500'>{notification}</small>
+                        <br></br>
+                      </>
+                    ))
+                }
             </div>
             <div className="mt-4">
                 <InputLabel
-                  htmlFor="user_password_confirmed"
+                  htmlFor="password_confirmation"
                   value="Confirm Password "
                 />
 
                 <TextInput
-                  id="user_password_confirmed"
+                  id="password_confirmation"
                   type="password"
-                  name="confirmed"
                   className="mt-1 block w-full"
                   onChange={(e) => 
-                    handleQuery({confirmed: e.target.value})
+                    handleChange({password_confirmation : e.target.value})
                   }
                 />
+                {
+                    errors.password_confirmation &&
+                    errors.password_confirmation.map((notification) => (
+                      <>
+                        <small className='text-red-500'>{notification}</small>
+                        <br></br>
+                      </>
+                    ))
+                }
               </div>
             <div className="mt-4 text-right">
               <Link

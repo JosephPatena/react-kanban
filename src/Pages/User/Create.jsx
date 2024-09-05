@@ -14,9 +14,11 @@ export default function Create() {
     name: '',
     email: '',
     password: '',
-    confirmed: '',
+    password_confirmation : '',
     redirect_not: true,
   });
+
+  const [errors, setErrors] = useState([]);
 
   const saveUser = async () => {
     await axios.post(`${import.meta.env.VITE_BASE_URL}/user/register`, user)
@@ -27,8 +29,9 @@ export default function Create() {
       
       navigate(`/user-view/${res.data.id}`)
     })
-    .catch(error => {
-    });
+    .catch(err => {
+      setErrors(err.response.data.errors)
+    })
   }
 
   const handleQuery = (query) => {
@@ -60,13 +63,21 @@ export default function Create() {
                 <TextInput
                   id="username"
                   type="text"
-                  name="name"
                   className="mt-1 block w-full"
                   isFocused={true}
                   onChange={(e) => 
                     handleQuery({name: e.target.value})
                   }
                 />
+                {
+                    errors.name &&
+                    errors.name.map((notification) => (
+                      <>
+                        <small className='text-red-500'>{notification}</small>
+                        <br></br>
+                      </>
+                    ))
+                }
               </div>
               <div className="mt-4">
                 <InputLabel
@@ -77,12 +88,20 @@ export default function Create() {
                 <TextInput
                   id="user_email"
                   type="text"
-                  name="email"
                   className="mt-1 block w-full"
                   onChange={(e) => 
                     handleQuery({email: e.target.value})
                   }
                 />
+                {
+                    errors.email &&
+                    errors.email.map((notification) => (
+                      <>
+                        <small className='text-red-500'>{notification}</small>
+                        <br></br>
+                      </>
+                    ))
+                }
               </div>
               <div className="mt-4">
                 <InputLabel
@@ -93,28 +112,44 @@ export default function Create() {
                 <TextInput
                   id="user_password"
                   type="password"
-                  name="password"
                   className="mt-1 block w-full"
                   onChange={(e) => 
                     handleQuery({password: e.target.value})
                   }
                 />
+                {
+                    errors.password &&
+                    errors.password.map((notification) => (
+                      <>
+                        <small className='text-red-500'>{notification}</small>
+                        <br></br>
+                      </>
+                    ))
+                }
               </div>
               <div className="mt-4">
                 <InputLabel
-                  htmlFor="user_password_confirmed"
-                  value="Confirm Password "
+                  htmlFor="password_confirmation"
+                  value="Confirm Password"
                 />
 
                 <TextInput
-                  id="user_password_confirmed"
+                  id="password_confirmation"
                   type="password"
-                  name="confirmed"
                   className="mt-1 block w-full"
                   onChange={(e) => 
-                    handleQuery({confirmed: e.target.value})
+                    handleQuery({password_confirmation : e.target.value})
                   }
                 />
+                {
+                    errors.password_confirmation &&
+                    errors.password_confirmation.map((notification) => (
+                        <>
+                          <small className='text-red-500'>{notification}</small>
+                          <br></br>
+                        </>
+                    ))
+                }
               </div>
               <div className="mt-4 text-right">
                 <Link

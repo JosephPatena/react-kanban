@@ -21,7 +21,7 @@ function AddTaskModal({ projects, getTasks, handleOpenModal, users, status='pend
         setTask((prev) => { return { ...prev, [e.target.name]: e.target.value } })
     }
 
-    const [notifications, setNotifications] = useState([]);
+    const [errors, setErrors] = useState([]);
 
     const typeClasses = {
         success: 'bg-green-100 border-green-400 text-green-700',
@@ -39,7 +39,7 @@ function AddTaskModal({ projects, getTasks, handleOpenModal, users, status='pend
             handleOpenModal()
         })
         .catch(err => {
-            setNotifications(err.response.data.errors)
+            setErrors(err.response.data.errors)
         })
     }
 
@@ -56,7 +56,7 @@ function AddTaskModal({ projects, getTasks, handleOpenModal, users, status='pend
                             key={'project_id'}
                             onChange={handleChange}
                             name="project_id"
-                            className={`${notifications.project_id ? 'border-red-300': ''} w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                            className={`${errors.project_id ? 'border-red-300': ''} w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
                         >
                             <option value=''>Select Project</option>
                             {
@@ -66,9 +66,12 @@ function AddTaskModal({ projects, getTasks, handleOpenModal, users, status='pend
                             }
                         </select>
                         {
-                            notifications.project_id &&
-                            notifications.project_id.map((notification) => (
-                                <small className='text-red-500'>{notification}</small>
+                            errors.project_id &&
+                            errors.project_id.map((notification) => (
+                                <>
+                                    <small className='text-red-500'>{notification}</small>
+                                    <br></br>
+                                </>
                             ))
                         }
                     </div>
@@ -81,12 +84,15 @@ function AddTaskModal({ projects, getTasks, handleOpenModal, users, status='pend
                             onChange={handleChange}
                             type="text"
                             name="name"
-                            className={`${notifications.name ? 'border-red-300': ''} w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                            className={`${errors.name ? 'border-red-300': ''} w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
                         />
                         {
-                            notifications.name &&
-                            notifications.name.map((notification) => (
-                                <small className='text-red-500'>{notification}</small>
+                            errors.name &&
+                            errors.name.map((notification) => (
+                                <>
+                                    <small className='text-red-500'>{notification}</small>
+                                    <br></br>
+                                </>
                             ))
                         }
                     </div>
@@ -99,12 +105,15 @@ function AddTaskModal({ projects, getTasks, handleOpenModal, users, status='pend
                             onChange={handleChange}
                             rows="4"
                             name="description"
-                            className={`${notifications.description ? 'border-red-300': ''} w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                            className={`${errors.description ? 'border-red-300': ''} w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
                         />
                         {
-                            notifications.description &&
-                            notifications.description.map((notification) => (
-                                <small className='text-red-500'>{notification}</small>
+                            errors.description &&
+                            errors.description.map((notification) => (
+                                <>
+                                    <small className='text-red-500'>{notification}</small>
+                                    <br></br>
+                                </>
                             ))
                         }
                     </div>
@@ -117,12 +126,15 @@ function AddTaskModal({ projects, getTasks, handleOpenModal, users, status='pend
                             onChange={handleChange}
                             type="date"
                             name="due_date"
-                            className={`${notifications.due_date ? 'border-red-300': ''} w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                            className={`${errors.due_date ? 'border-red-300': ''} w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
                         />
                         {
-                            notifications.due_date &&
-                            notifications.due_date.map((notification) => (
-                                <small className='text-red-500'>{notification}</small>
+                            errors.due_date &&
+                            errors.due_date.map((notification) => (
+                                <>
+                                    <small className='text-red-500'>{notification}</small>
+                                    <br></br>
+                                </>
                             ))
                         }
                     </div>
@@ -136,7 +148,7 @@ function AddTaskModal({ projects, getTasks, handleOpenModal, users, status='pend
                                 defaultValue={status}
                                 onChange={handleChange}
                                 name="status"
-                                className={`${notifications.status ? 'border-red-300': ''} w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                                className={`${errors.status ? 'border-red-300': ''} w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
                             >
                                 <option value="pending">Pending</option>
                                 <option value="in_progress">In Progress</option>
@@ -144,10 +156,12 @@ function AddTaskModal({ projects, getTasks, handleOpenModal, users, status='pend
                                 <option value="completed">Completed</option>
                             </select>
                             {
-                                notifications.status &&
-                                notifications.status.map((notification) => (
-
-                                    <small className='text-red-500'>{notification}</small>
+                                errors.status &&
+                                errors.status.map((notification) => (
+                                    <>
+                                        <small className='text-red-500'>{notification}</small>
+                                        <br></br>
+                                    </>
                                 ))
                             }
                         </div>
@@ -160,17 +174,19 @@ function AddTaskModal({ projects, getTasks, handleOpenModal, users, status='pend
                                 defaultValue={priority}
                                 onChange={handleChange}
                                 name="priority"
-                                className={`${notifications.priority ? 'border-red-300': ''} w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                                className={`${errors.priority ? 'border-red-300': ''} w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
                             >
                                 <option value="low">Low</option>
                                 <option value="medium">Medium</option>
                                 <option value="high">High</option>
                             </select>
                             {
-                                notifications.priority &&
-                                notifications.priority.map((notification) => (
-
-                                    <small className='text-red-500'>{notification}</small>
+                                errors.priority &&
+                                errors.priority.map((notification) => (
+                                    <>
+                                        <small className='text-red-500'>{notification}</small>
+                                        <br></br>
+                                    </>
                                 ))
                             }
                         </div>
@@ -184,7 +200,7 @@ function AddTaskModal({ projects, getTasks, handleOpenModal, users, status='pend
                                 key={'assigned_user_id'}
                                 onChange={handleChange}
                                 name="assigned_user_id"
-                                className={`${notifications.assigned_user_id ? 'border-red-300': ''} w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                                className={`${errors.assigned_user_id ? 'border-red-300': ''} w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
                             >
                                 <option value=''>Select Assignee</option>
                                 {
@@ -194,10 +210,12 @@ function AddTaskModal({ projects, getTasks, handleOpenModal, users, status='pend
                                 }
                             </select>
                             {
-                                notifications.assigned_user_id &&
-                                notifications.assigned_user_id.map((notification) => (
-
-                                    <small className='text-red-500'>{notification}</small>
+                                errors.assigned_user_id &&
+                                errors.assigned_user_id.map((notification) => (
+                                    <>
+                                        <small className='text-red-500'>{notification}</small>
+                                        <br></br>
+                                    </>
                                 ))
                             }
                         </div>
@@ -209,7 +227,7 @@ function AddTaskModal({ projects, getTasks, handleOpenModal, users, status='pend
                                 key={'tester_user_id'}
                                 onChange={handleChange}
                                 name="tester_user_id"
-                                className={`${notifications.tester_user_id ? 'border-red-300': ''} w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                                className={`${errors.tester_user_id ? 'border-red-300': ''} w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
                             >
                                 <option value=''>Select Tester</option>
                                 {
@@ -219,10 +237,12 @@ function AddTaskModal({ projects, getTasks, handleOpenModal, users, status='pend
                                 }
                             </select>
                             {
-                                notifications.tester_user_id &&
-                                notifications.tester_user_id.map((notification) => (
-
-                                    <small className='text-red-500'>{notification}</small>
+                                errors.tester_user_id &&
+                                errors.tester_user_id.map((notification) => (
+                                    <>
+                                        <small className='text-red-500'>{notification}</small>
+                                        <br></br>
+                                    </>
                                 ))
                             }
                         </div>
@@ -234,7 +254,7 @@ function AddTaskModal({ projects, getTasks, handleOpenModal, users, status='pend
                                 key={'reviewer_user_id'}
                                 onChange={handleChange}
                                 name="reviewer_user_id"
-                                className={`${notifications.reviewer_user_id ? 'border-red-300': ''} w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                                className={`${errors.reviewer_user_id ? 'border-red-300': ''} w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
                             >
                                 <option value=''>Select Reviewer</option>
                                 {
@@ -244,10 +264,12 @@ function AddTaskModal({ projects, getTasks, handleOpenModal, users, status='pend
                                 }
                             </select>
                             {
-                                notifications.reviewer_user_id &&
-                                notifications.reviewer_user_id.map((notification) => (
-
-                                    <small className='text-red-500'>{notification}</small>
+                                errors.reviewer_user_id &&
+                                errors.reviewer_user_id.map((notification) => (
+                                    <>
+                                        <small className='text-red-500'>{notification}</small>
+                                        <br></br>
+                                    </>
                                 ))
                             }
                         </div>

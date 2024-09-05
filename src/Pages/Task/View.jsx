@@ -322,6 +322,7 @@ function TaskView({ task, users, getTasks }) {
                             onChange={handleSave}
                             defaultValue={task.assigned_user_id}
                         >
+                            <option value="">Not Assign</option>
                             {
                                 Object.values(users).map((user, key) => (
                                     <option key={key} value={user.id}>{user.name}</option>
@@ -339,6 +340,7 @@ function TaskView({ task, users, getTasks }) {
                             onChange={handleSave}
                             defaultValue={task.tester_user_id}
                         >
+                            <option value="">Not Assign</option>
                             {
                                 Object.values(users).map((user, key) => (
                                     <option key={key} value={user.id}>{user.name}</option>
@@ -356,6 +358,7 @@ function TaskView({ task, users, getTasks }) {
                             onChange={handleSave}
                             defaultValue={task.reviewer_user_id}
                         >
+                            <option value="">Not Assign</option>
                             {
                                 Object.values(users).map((user, key) => (
                                     <option key={key} value={user.id}>{user.name}</option>

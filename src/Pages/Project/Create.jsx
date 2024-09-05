@@ -19,13 +19,16 @@ export default function Create() {
     redirect_not: true
   });
 
+  const [errors, setErrors] = useState([]);
+
   const saveProject = async () => {
     await axios.post(`${import.meta.env.VITE_BASE_URL}/project/save`, project)
     .then(res => {
       navigate(`/project-view/${res.data.id}`)
     })
-    .catch(error => {
-    });
+    .catch(err => {
+      setErrors(err.response.data.errors)
+    })
   }
 
   const handleQuery = (query) => {
@@ -79,6 +82,15 @@ export default function Create() {
                     handleQuery({name: e.target.value})
                   }
                 />
+                {
+                    errors.name &&
+                    errors.name.map((notification) => (
+                      <>
+                        <small className='text-red-500'>{notification}</small>
+                        <br></br>
+                      </>
+                    ))
+                }
               </div>
               <div className="mt-4">
                 <InputLabel
@@ -94,6 +106,15 @@ export default function Create() {
                     handleQuery({description: e.target.value})
                   }
                 />
+                {
+                    errors.description &&
+                    errors.description.map((notification) => (
+                      <>
+                        <small className='text-red-500'>{notification}</small>
+                        <br></br>
+                      </>
+                    ))
+                }
               </div>
               <div className="mt-4">
                 <InputLabel
@@ -110,6 +131,15 @@ export default function Create() {
                     handleQuery({due_date: e.target.value})
                   }
                 />
+                {
+                    errors.due_date &&
+                    errors.due_date.map((notification) => (
+                      <>
+                        <small className='text-red-500'>{notification}</small>
+                        <br></br>
+                      </>
+                    ))
+                }
               </div>
               <div className="mt-4">
                 <InputLabel htmlFor="project_status" value="Project Status" />
@@ -127,6 +157,15 @@ export default function Create() {
                   <option value="in_progress">In Progress</option>
                   <option value="completed">Completed</option>
                 </SelectInput>
+                {
+                    errors.status &&
+                    errors.status.map((notification) => (
+                      <>
+                        <small className='text-red-500'>{notification}</small>
+                        <br></br>
+                      </>
+                    ))
+                }
               </div>
               <div className="mt-4 text-right">
                 <Link
